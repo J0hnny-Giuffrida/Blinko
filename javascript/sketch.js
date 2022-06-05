@@ -15,10 +15,11 @@ function setup() {
   createCanvas(600, 400);
   engine = Engine.create();
   world = engine.world;
-}
 
-//Create PlayerBall launcher at top of canvas
-//----Create new Ball constructor function and reference ball.js
+  //Create PlayerBall launcher at top of canvas
+  //----Create new Ball constructor function and reference ball.js
+  var b = new Ball(300, 50);
+}
 
 //Draw background
 function draw() {
