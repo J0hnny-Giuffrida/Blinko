@@ -6,11 +6,28 @@
     <title>Plinko Bubble Game</title>
     <meta name="description" content="" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="stylesheet" href="style.css" />
-    <script src="sketch.js" async defer></script>
-    <script src="balls.js" async defer></script>
-    <script src="boundary.js" async defer></script>
-    <script src="peg.js" async defer></script>
+    <link rel="stylesheet" href="css\style.css" />
+    <script src="libraries\p5.js" async defer></script>
+    <script src="libraries\matter.js" async defer></script>
+    <script src="javascript\sketch.js" async defer></script>
+    <script src="javascript\balls.js" async defer></script>
+    <script src="javascript\boundary.js" async defer></script>
+    <script src="javascript\peg.js" async defer></script>
   </head>
-  <body></body>
+  <body>
+    <table width="680" border="0" cellspacing="0">
+      <tr>
+        <td colspan="3" height="20"><center>Plinko</center></td>
+      </tr>
+      <tr>
+        <td width="20"></td>
+        <td width="640">
+          <div id="sketch-holder" style="position: relative">
+            <!-- Our sketch will go here! -->
+          </div>
+        </td>
+        <td width="20"></td>
+      </tr>
+    </table>
+  </body>
 </html>
