@@ -18,10 +18,12 @@ function setup() {
 
   //Create PlayerBall launcher at top of canvas
   //----Create new Ball constructor function and reference ball.js
-  var b = new Ball(300, 50);
+  var b = new Ball(300, 50, 10);
+  balls.push(b);
 }
 
 //Draw background
 function draw() {
   background(50);
+  balls[0].show();
 }

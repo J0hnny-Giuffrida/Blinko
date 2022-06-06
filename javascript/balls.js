@@ -10,9 +10,10 @@ function Ball(x, y, r) {
 //Create function to show all balls
 //----Color and outline ball for visual clarity
 //----Position ball w/ matter.js
-Particle.prototype.show = function () {
+Ball.prototype.show = function () {
   fill(255);
   stroke(255);
   var pos = this.body.position;
-  ellipse();
+  translate(pos.x, pos.y);
+  ellipse(0, 0, this.r * 2);
 };
