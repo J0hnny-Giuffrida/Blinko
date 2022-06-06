@@ -1,1 +1,2 @@
-//Create Boundary that prevents balls from leaving sides but allows via the bottom
+//Create Boundary that prevents playerball from leaving sides
+//-----Allow playerball to exit map via bottom
