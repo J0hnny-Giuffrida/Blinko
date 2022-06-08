@@ -6,9 +6,9 @@ function Boundary(x, y, w, h) {
     friction: 0.5,
     isStatic: true,
   };
-  this.body = Bodies.rectangle(x, y, w, h);
+  this.body = Bodies.rectangle(x, y, w, h, options);
   this.w = w;
-  this.h - h;
+  this.h = h;
   World.add(world, this.body);
 }
 

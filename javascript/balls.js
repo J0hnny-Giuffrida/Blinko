@@ -24,5 +24,12 @@ Ball.prototype.show = function () {
   pop();
 };
 
+//Create function to delete balls once they fall offscreen
+Ball.prototype.isOffScreen = function () {
+  var x = this.body.position.x;
+  var y = this.body.position.y;
+  return x < -50 || x > width + 50 || y > height;
+};
+
 //Create varying types of playerballs
 //----each type of ball has different friction +

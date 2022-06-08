@@ -7,7 +7,7 @@ class Launcher {
         y: y,
       },
       bodyB: body,
-      stiffness: 0.2,
+      stiffness: 0.4,
       length: 10,
     };
     this.launch = Constraint.create(options);

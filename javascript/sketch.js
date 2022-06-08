@@ -52,18 +52,20 @@ function setup() {
       pegs.push(p);
     }
   }
-
+  //Load in a new Ball to use in the Launcher
+  var b = new Ball(800, 100, 10);
+  balls.push(b);
   //Create PlayerBall launcher at top of canvas
   //----Create new Ball constructor function and reference ball.js
   //--------Eventually create an array of different ball types playerball draws from
-  var b = new Ball(800, 100, 10);
-  balls.push(b);
-
   playerLauncher = new Launcher(800, 100, b.body);
 
   //Create Boundaries here
   //-----Extend bottom boundaries below canvas slightly so I can use isOffScreen function to remove ball when it leaves canvas
-  var bottomBound = new Boundary(width / 2, height + 50, width, 200);
+  var bottomBound = new Boundary(width / 2, height + 50, width + 25, 0);
+  var rightBound = new Boundary(1625, 450, 50, height + 50);
+  var leftBound = new Boundary(-25, 450, 50, height + 50);
+  var topBound = new Boundary(width / 2, 0, width + 25, 10);
 }
 //Mouse Release Function so that slingshot actually slings lol
 function mouseReleased() {
@@ -75,8 +77,16 @@ function mouseReleased() {
 function draw() {
   background(50);
   Engine.update(engine);
-  balls[0].show();
   playerLauncher.show();
+
+  for (var i = 0; i < balls.length; i++) {
+    balls[i].show();
+    if (balls[i].isOffScreen()) {
+      World.remove(world, balls[i].body);
+      balls.splice(i, 1);
+      i--;
+    }
+  }
 
   for (var i = 0; i < pegs.length; i++) {
     pegs[i].show();
