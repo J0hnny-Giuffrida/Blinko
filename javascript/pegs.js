@@ -1,8 +1,9 @@
 //Create Static pegs
 //-----On contact with playerball pegs remove themselves from world
+//---------Most likely do this with Matter.Collision(???)
 function Peg(x, y, r) {
   var options = {
-    restitution: 1,
+    restitution: 2,
     friction: 0,
     isStatic: true,
   };

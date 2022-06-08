@@ -3,22 +3,38 @@ var Engine = Matter.Engine,
   //Create World
   World = Matter.World,
   //Create Bodies
-  Bodies = Matter.Bodies;
+  Bodies = Matter.Bodies,
+  //Create Mouse
+  Mouse = Matter.Mouse,
+  //Create Constraint
+  Constraint = Matter.Constraint,
+  //Create Mouse Constraint
+  MouseConstraint = Matter.MouseConstraint;
 
 var engine;
 var world;
 var balls = [];
 var pegs = [];
-var cols = 11;
-var rows = 11;
+var cols = 12;
+var rows = 12;
+let playerLauncher;
 
 //Canvas for Game
 //----Add matter.js engine to canvas
 function setup() {
-  createCanvas(600, 800);
+  const canvas = createCanvas(1600, 900);
   engine = Engine.create();
   world = engine.world;
   world.gravity.y = 1;
+  //Mouse for Matter
+  const mouse = Mouse.create(canvas.elt);
+  //Options for canvas
+  const options = {
+    mouse: mouse,
+  };
+  //Mouse Constraint for interaction with playerball Launcher
+  mConstraint = MouseConstraint.create(engine, options);
+  World.add(world, mConstraint);
   //Create for loop for pegs to test physics
   var spacing = width / cols;
 
@@ -31,7 +47,7 @@ function setup() {
         if (i == cols - 3) x += 3;
       }
       var y = 2 * spacing + j * spacing;
-      var p = new Peg(x, y, 4);
+      var p = new Peg(x, y, 10);
       pegs.push(p);
     }
   }
@@ -39,15 +55,23 @@ function setup() {
   //Create PlayerBall launcher at top of canvas
   //----Create new Ball constructor function and reference ball.js
   //--------Eventually create an array of different ball types playerball draws from
-  var b = new Ball(300, 0, 10);
+  var b = new Ball(800, 50, 10);
   balls.push(b);
-}
 
+  playerLauncher = new Launcher(800, 50, b.body);
+}
+//Mouse Release Function so that slingshot actually slings lol
+function mouseReleased() {
+  setTimeout(() => {
+    playerLauncher.release();
+  }, 20);
+}
 //Draw background
 function draw() {
   background(50);
   Engine.update(engine);
   balls[0].show();
+  playerLauncher.show();
 
   for (var i = 0; i < pegs.length; i++) {
     pegs[i].show();

@@ -3,7 +3,7 @@
 //----add player ball to world w/ matter.js
 function Ball(x, y, r) {
   var options = {
-    restitution: 0.5,
+    restitution: 1,
     friction: 0.5,
   };
   this.body = Bodies.circle(x, y, r, options);
