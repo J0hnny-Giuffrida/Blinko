@@ -7,6 +7,7 @@ function Ball(x, y, r) {
     friction: 0.5,
   };
   this.body = Bodies.circle(x, y, r, options);
+  this.body.label = "ball";
   this.r = r;
   World.add(world, this.body);
 }

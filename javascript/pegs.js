@@ -8,6 +8,7 @@ function Peg(x, y, r) {
     isStatic: true,
   };
   this.body = Bodies.circle(x, y, r, options);
+  this.body.label = "peg";
   this.r = r;
   World.add(world, this.body);
 }

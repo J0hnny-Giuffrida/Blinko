@@ -9,7 +9,9 @@ var Engine = Matter.Engine,
   //Create Constraint
   Constraint = Matter.Constraint,
   //Create Mouse Constraint
-  MouseConstraint = Matter.MouseConstraint;
+  MouseConstraint = Matter.MouseConstraint,
+  //Create Events
+  Events = Matter.Events;
 
 var engine;
 var world;
@@ -33,32 +35,48 @@ function setup() {
   const options = {
     mouse: mouse,
   };
+
+  //Create Collision function to detect when playerball hits pegs and deletes them from world
+  function collision(event) {
+    var pairs = event.pairs;
+    for (var i = 0; i < pairs.length; i++) {
+      var labelA = pairs[i].bodyA.label;
+      var labelB = pairs[i].bodyB.label;
+      if (labelA == "ball" && labelB == "peg") {
+      }
+      if (labelA == "peg" && labelB == "ball") {
+        console.log(labelB, labelA);
+      }
+    }
+  }
+  Events.on(engine, "collisionStart", collision);
   //Mouse Constraint for interaction with playerball Launcher
   mConstraint = MouseConstraint.create(engine, options);
   World.add(world, mConstraint);
   //Create for loop for pegs to test physics
   var spacing = width / cols;
-
-  for (var j = 0; j < rows; j++) {
-    for (var i = 0; i < cols; i++) {
-      var x = i * spacing;
-      if (j % 2 == 0) {
-        x += spacing / 2;
-        if (i == 2) x -= 3;
-        if (i == cols - 3) x += 3;
+  if (pegs.length === 0) {
+    for (var j = 0; j < rows; j++) {
+      for (var i = 0; i < cols; i++) {
+        var x = i * spacing;
+        if (j % 2 == 0) {
+          x += spacing / 2;
+          if (i == 2) x -= 3;
+          if (i == cols - 3) x += 3;
+        }
+        var y = 2 * spacing + j * spacing;
+        var p = new Peg(x, y, 10);
+        pegs.push(p);
       }
-      var y = 2 * spacing + j * spacing;
-      var p = new Peg(x, y, 10);
-      pegs.push(p);
     }
   }
   //Load in a new Ball to use in the Launcher
-  var b = new Ball(800, 100, 10);
-  balls.push(b);
+  var playerBall = new Ball(800, 100, 10);
+  balls.push(playerBall);
   //Create PlayerBall launcher at top of canvas
   //----Create new Ball constructor function and reference ball.js
   //--------Eventually create an array of different ball types playerball draws from
-  playerLauncher = new Launcher(800, 100, b.body);
+  playerLauncher = new Launcher(800, 100, playerBall.body);
 
   //Create Boundaries here
   //-----Extend bottom boundaries below canvas slightly so I can use isOffScreen function to remove ball when it leaves canvas
@@ -79,12 +97,18 @@ function draw() {
   Engine.update(engine);
   playerLauncher.show();
 
+  //isOffScreen Function to delete balls when they fall through and reattach new ball to launcher
   for (var i = 0; i < balls.length; i++) {
     balls[i].show();
     if (balls[i].isOffScreen()) {
       World.remove(world, balls[i].body);
       balls.splice(i, 1);
       i--;
+
+      var playerBall = new Ball(800, 100, 10);
+      balls.push(playerBall);
+
+      playerLauncher = new Launcher(800, 100, playerBall.body);
     }
   }
 
