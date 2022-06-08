@@ -27,3 +27,4 @@ class Launcher {
     }
   }
 }
+//Will eventually need to add something to remove launched balls from the world
