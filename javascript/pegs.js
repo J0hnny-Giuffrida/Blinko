@@ -10,6 +10,8 @@ function Peg(x, y, r) {
   this.body = Bodies.circle(x, y, r, options);
   this.body.label = "peg";
   this.r = r;
+  this.body.collided = "false";
+  this.body.index = pegs.length;
   World.add(world, this.body);
 }
 

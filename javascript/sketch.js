@@ -45,11 +45,12 @@ function setup() {
       if (labelA == "ball" && labelB == "peg") {
       }
       if (labelA == "peg" && labelB == "ball") {
-        console.log(labelB, labelA);
+        pairs[i].bodyA.collided = "true";
+        World.remove(world, pairs[i].bodyA);
       }
     }
   }
-  Events.on(engine, "collisionStart", collision);
+  Events.on(engine, "collisionEnd", collision);
   //Mouse Constraint for interaction with playerball Launcher
   mConstraint = MouseConstraint.create(engine, options);
   World.add(world, mConstraint);
@@ -105,6 +106,7 @@ function draw() {
       balls.splice(i, 1);
       i--;
 
+      //Repeat loading in new Ball + Launcher in same location once ball falls offscreen so the launcher "reloads"
       var playerBall = new Ball(800, 100, 10);
       balls.push(playerBall);
 
@@ -114,5 +116,10 @@ function draw() {
 
   for (var i = 0; i < pegs.length; i++) {
     pegs[i].show();
+    if (pegs[i].body.collided === "true") {
+      World.remove(world, pegs[i].body);
+      pegs.splice(i, 1);
+      i--;
+    }
   }
 }
