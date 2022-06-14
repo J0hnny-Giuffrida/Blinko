@@ -24,10 +24,12 @@ var rows = 4;
 let playerLauncher;
 let score = 0;
 let myFont;
+let bounce;
 
 //Preload Font + Music Files for game
 function preload() {
   myFont = loadFont("assets/ReplicaTrialTT-LightItalic.ttf");
+  bounce = loadSound("assets/mixkit-game-ball-tap-2073.wav");
 }
 //Canvas for Game
 //----Add matter.js engine to canvas
@@ -44,6 +46,8 @@ function setup() {
   };
   //Text Options for Scoreboard
   textSize(30);
+  //Adjusting sounds for Bounce
+  bounce.setVolume(0.15);
 
   //Create Collision function to detect when playerball hits pegs and changed collided class
   function collision(event) {
@@ -56,6 +60,7 @@ function setup() {
         pairs[i].bodyB.collided = "true";
         World.remove(world, pairs[i].bodyA);
         score = score + 10;
+        bounce.play();
       }
     }
   }
