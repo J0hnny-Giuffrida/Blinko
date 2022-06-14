@@ -3,7 +3,7 @@
 //---------Most likely do this with Matter.Collision(???)
 function Peg(x, y, r) {
   var options = {
-    restitution: 2,
+    restitution: 3,
     friction: 0,
     isStatic: true,
   };

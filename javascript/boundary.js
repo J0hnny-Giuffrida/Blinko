@@ -3,7 +3,7 @@
 function Boundary(x, y, w, h) {
   var options = {
     restitution: 1,
-    friction: 0.5,
+    friction: 0,
     isStatic: true,
   };
   this.body = Bodies.rectangle(x, y, w, h, options);

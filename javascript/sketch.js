@@ -20,8 +20,9 @@ var pegs = [];
 var boundaries = [];
 var bouncers = [];
 var cols = 12;
-var rows = 12;
+var rows = 4;
 let playerLauncher;
+let score = 0;
 
 //Canvas for Game
 //----Add matter.js engine to canvas
@@ -36,6 +37,8 @@ function setup() {
   const options = {
     mouse: mouse,
   };
+  //Text Options for Scoreboard
+  textSize(20);
 
   //Create Collision function to detect when playerball hits pegs and changed collided class
   function collision(event) {
@@ -46,6 +49,7 @@ function setup() {
       if (labelA == "peg" && labelB == "ball") {
         pairs[i].bodyA.collided = "true";
         World.remove(world, pairs[i].bodyA);
+        score = score + 1;
       }
     }
   }
@@ -98,10 +102,13 @@ function mouseReleased() {
     playerLauncher.release();
   }, 20);
 }
-//Draw background
+//Use P5 to render all of my objects in matter.js
 function draw() {
   background(0, 0, 0);
   Engine.update(engine);
+  //Scoreboard Text will go here
+  text("Score:  " + score, 10, 25);
+  //Player Launcher Render
   playerLauncher.show();
 
   //isOffScreen Function to delete balls when they fall through and reattach new ball to launcher

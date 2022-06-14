@@ -1,6 +1,6 @@
 function Bouncer(x, y, w, h) {
   var options = {
-    restitution: 1,
+    restitution: 3,
     friction: 0.3,
     isStatic: true,
   };
