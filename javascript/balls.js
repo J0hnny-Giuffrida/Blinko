@@ -8,6 +8,7 @@ function Ball(x, y, r) {
   };
   this.body = Bodies.circle(x, y, r, options);
   this.body.label = "ball";
+  this.body.collided = "false";
   this.r = r;
   World.add(world, this.body);
 }
@@ -32,5 +33,27 @@ Ball.prototype.isOffScreen = function () {
   return x < -50 || x > width + 50 || y > height;
 };
 
-//Create varying types of playerballs
-//----each type of ball has different friction +
+//Multiplier Functions for Score
+Ball.prototype.score2 = function () {
+  var x = this.body.position.x;
+  var y = this.body.position.y;
+  return x < 270 && x > 0 && y > height;
+};
+
+Ball.prototype.scoreHalf = function () {
+  var x = this.body.position.x;
+  var y = this.body.position.y;
+  return x < 590 && x > 370 && y > height;
+};
+
+Ball.prototype.scorehalfRight = function () {
+  var x = this.body.position.x;
+  var y = this.body.position.y;
+  return x < 1230 && x > 1010 && y > height;
+};
+
+Ball.prototype.score2Right = function () {
+  var x = this.body.position.x;
+  var y = this.body.position.y;
+  return x < 1600 && x > 1330 && y > height;
+};

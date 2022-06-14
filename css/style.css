@@ -1,11 +1,25 @@
 body {
-  height: 100%;
   background-color: rgb(51, 50, 50);
 }
 
 body {
-  margin-top: 60px;
+  margin-top: 40px;
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+@font-face {
+  font-family: "Replica";
+  src: url("assets\ReplicaTrialTT-Heavy.ttf");
+}
+
+#title {
+  margin: 0;
+  color: white;
+  font-family: "Replica";
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
 }

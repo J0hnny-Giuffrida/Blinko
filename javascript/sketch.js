@@ -53,8 +53,9 @@ function setup() {
       var labelB = pairs[i].bodyB.label;
       if (labelA == "peg" && labelB == "ball") {
         pairs[i].bodyA.collided = "true";
+        pairs[i].bodyB.collided = "true";
         World.remove(world, pairs[i].bodyA);
-        score = score + 1;
+        score = score + 10;
       }
     }
   }
@@ -115,13 +116,45 @@ function draw() {
   textFont(myFont);
   fill(233, 236, 239);
   noStroke();
-  text("Score:  " + score, 10, 35);
+  text("Score :  " + score, 10, 35);
+  //Left Multiplier Text
+  textFont(myFont);
+  fill(233, 236, 239);
+  noStroke();
+  text("x2", 135, 850);
+  //Left-Middle Multiplier Text
+  textFont(myFont);
+  fill(233, 236, 239);
+  noStroke();
+  text("x1.5", 450, 850);
+  //Right-Middle Multiplier Text
+  textFont(myFont);
+  fill(233, 236, 239);
+  noStroke();
+  text("x1.5", 1100, 850);
+  //Right Multiplier Text
+  textFont(myFont);
+  fill(233, 236, 239);
+  noStroke();
+  text("x2", 1435, 850);
   //Player Launcher Render
   playerLauncher.show();
 
   //isOffScreen Function to delete balls when they fall through and reattach new ball to launcher
   for (var i = 0; i < balls.length; i++) {
     balls[i].show();
+    if (balls[i].score2() && balls[i].body.collided === "true") {
+      score = score * 2;
+    }
+    if (balls[i].scoreHalf() && balls[i].body.collided === "true") {
+      score = score * 1.5;
+    }
+    if (balls[i].scorehalfRight() && balls[i].body.collided === "true") {
+      score = score * 1.5;
+    }
+    if (balls[i].score2Right() && balls[i].body.collided === "true") {
+      score = score * 2;
+    }
     if (balls[i].isOffScreen()) {
       World.remove(world, balls[i].body);
       balls.splice(i, 1);
