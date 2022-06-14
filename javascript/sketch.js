@@ -23,7 +23,12 @@ var cols = 12;
 var rows = 4;
 let playerLauncher;
 let score = 0;
+let myFont;
 
+//Preload Font + Music Files for game
+function preload() {
+  myFont = loadFont("assets/ReplicaTrialTT-LightItalic.ttf");
+}
 //Canvas for Game
 //----Add matter.js engine to canvas
 function setup() {
@@ -38,7 +43,7 @@ function setup() {
     mouse: mouse,
   };
   //Text Options for Scoreboard
-  textSize(20);
+  textSize(30);
 
   //Create Collision function to detect when playerball hits pegs and changed collided class
   function collision(event) {
@@ -107,7 +112,10 @@ function draw() {
   background(0, 0, 0);
   Engine.update(engine);
   //Scoreboard Text will go here
-  text("Score:  " + score, 10, 25);
+  textFont(myFont);
+  fill(233, 236, 239);
+  noStroke();
+  text("Score:  " + score, 10, 35);
   //Player Launcher Render
   playerLauncher.show();
 
