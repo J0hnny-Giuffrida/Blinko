@@ -11,13 +11,12 @@ function Peg(x, y, r) {
   this.body.label = "peg";
   this.r = r;
   this.body.collided = "false";
-  this.body.index = pegs.length;
   World.add(world, this.body);
 }
 
 Peg.prototype.show = function () {
-  fill(255);
-  stroke("rgba(100%,0%,100%,0.5)");
+  fill(52, 58, 64);
+  stroke(108, 117, 125);
   var pos = this.body.position;
   push();
   translate(pos.x, pos.y);

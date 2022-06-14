@@ -16,8 +16,8 @@ function Ball(x, y, r) {
 //----Color and outline ball for visual clarity
 //----Position ball w/ matter.js
 Ball.prototype.show = function () {
-  fill(255);
-  stroke(255);
+  fill(233, 236, 239);
+  stroke(108, 117, 125);
   var pos = this.body.position;
   push();
   translate(pos.x, pos.y);

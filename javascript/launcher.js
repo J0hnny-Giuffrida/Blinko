@@ -20,11 +20,12 @@ class Launcher {
 
   show() {
     if (this.launch.bodyB) {
-      stroke(255);
+      fill(173, 181, 189);
+      stroke(173, 181, 189);
       const posA = this.launch.pointA;
       const posB = this.launch.bodyB.position;
+      strokeWeight(4);
       line(posA.x, posA.y, posB.x, posB.y);
     }
   }
 }
-//Will eventually need to add something to remove launched balls from the world

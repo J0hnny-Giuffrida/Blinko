@@ -18,6 +18,7 @@ var world;
 var balls = [];
 var pegs = [];
 var boundaries = [];
+var bouncers = [];
 var cols = 12;
 var rows = 12;
 let playerLauncher;
@@ -36,14 +37,12 @@ function setup() {
     mouse: mouse,
   };
 
-  //Create Collision function to detect when playerball hits pegs and deletes them from world
+  //Create Collision function to detect when playerball hits pegs and changed collided class
   function collision(event) {
     var pairs = event.pairs;
     for (var i = 0; i < pairs.length; i++) {
       var labelA = pairs[i].bodyA.label;
       var labelB = pairs[i].bodyB.label;
-      if (labelA == "ball" && labelB == "peg") {
-      }
       if (labelA == "peg" && labelB == "ball") {
         pairs[i].bodyA.collided = "true";
         World.remove(world, pairs[i].bodyA);
@@ -66,13 +65,13 @@ function setup() {
           if (i == cols - 3) x += 3;
         }
         var y = 2 * spacing + j * spacing;
-        var p = new Peg(x, y, 10);
+        var p = new Peg(x, y, 15);
         pegs.push(p);
       }
     }
   }
   //Load in a new Ball to use in the Launcher
-  var playerBall = new Ball(800, 100, 10);
+  var playerBall = new Ball(800, 100, 15);
   balls.push(playerBall);
   //Create PlayerBall launcher at top of canvas
   //----Create new Ball constructor function and reference ball.js
@@ -85,6 +84,13 @@ function setup() {
   var rightBound = new Boundary(1625, 450, 50, height + 50);
   var leftBound = new Boundary(-25, 450, 50, height + 50);
   var topBound = new Boundary(width / 2, 0, width + 25, 10);
+
+  //Create 3 Bouncers at bottom of screen
+  var bouncer1 = new Bouncer(320, 855, 100, 150);
+  var bouncer2 = new Bouncer(640, 855, 100, 150);
+  var bouncer3 = new Bouncer(960, 855, 100, 150);
+  var bouncer4 = new Bouncer(1280, 855, 100, 150);
+  bouncers.push(bouncer1, bouncer2, bouncer3, bouncer4);
 }
 //Mouse Release Function so that slingshot actually slings lol
 function mouseReleased() {
@@ -94,7 +100,7 @@ function mouseReleased() {
 }
 //Draw background
 function draw() {
-  background(50);
+  background(0, 0, 0);
   Engine.update(engine);
   playerLauncher.show();
 
@@ -107,13 +113,13 @@ function draw() {
       i--;
 
       //Repeat loading in new Ball + Launcher in same location once ball falls offscreen so the launcher "reloads"
-      var playerBall = new Ball(800, 100, 10);
+      var playerBall = new Ball(800, 100, 15);
       balls.push(playerBall);
 
       playerLauncher = new Launcher(800, 100, playerBall.body);
     }
   }
-
+  //For loop to display pegs, checks collided property and if true removes pegs from render
   for (var i = 0; i < pegs.length; i++) {
     pegs[i].show();
     if (pegs[i].body.collided === "true") {
@@ -121,5 +127,9 @@ function draw() {
       pegs.splice(i, 1);
       i--;
     }
+  }
+
+  for (var i = 0; i < bouncers.length; i++) {
+    bouncers[i].show();
   }
 }
