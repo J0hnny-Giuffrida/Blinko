@@ -24,11 +24,13 @@ var rows = 4;
 let playerLauncher;
 let score = 0;
 let myFont;
+let myFont2;
 let bounce;
 
 //Preload Font + Music Files for game
 function preload() {
   myFont = loadFont("assets/ReplicaTrialTT-LightItalic.ttf");
+  myFont2 = loadFont("assets/ReplicaTrialTT-Heavy.ttf");
   bounce = loadSound("assets/mixkit-game-ball-tap-2073.wav");
 }
 //Canvas for Game
@@ -117,6 +119,11 @@ function mouseReleased() {
 function draw() {
   background(0, 0, 0);
   Engine.update(engine);
+  //Title Text
+  textFont(myFont2);
+  fill(233, 236, 239);
+  noStroke();
+  text("STINKO", 1460, 40);
   //Scoreboard Text will go here
   textFont(myFont);
   fill(233, 236, 239);
@@ -184,5 +191,18 @@ function draw() {
 
   for (var i = 0; i < bouncers.length; i++) {
     bouncers[i].show();
+  }
+
+  //Game Over Text
+  if (pegs.length == 0) {
+    textFont(myFont2);
+    fill(233, 236, 239);
+    noStroke();
+    text("GAME OVER", 700, 350);
+    //Add score to game over text
+    textFont(myFont);
+    fill(233, 236, 239);
+    noStroke();
+    text("Your score is  " + score, 670, 430);
   }
 }
